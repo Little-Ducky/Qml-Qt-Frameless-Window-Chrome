@@ -13,12 +13,7 @@ bool MacPlatform::nativeEvent(const QByteArray &type,
 {
     if (MacUtils::isInResizeArea(mapFromGlobal(QCursor::pos()), size()))
     {
-      return false;
-    }
-
-    if (macUtils.resizeModeActive())
-    {
-      return true;
+        return false;
     }
 
     NSEvent* event = static_cast<NSEvent*>(message);
@@ -40,9 +35,6 @@ bool MacPlatform::nativeEvent(const QByteArray &type,
             [window standardWindowButton:NSWindowZoomButton];
 
         NSPoint p = [event locationInWindow];
-
-        constexpr int Border = 4;
-        constexpr int Corner = Border * 2;
 
         NSView *titleBarView = closeButton.superview;
 
@@ -88,7 +80,6 @@ bool MacPlatform::nativeEvent(const QByteArray &type,
     return QQuickWindow::nativeEvent(type, message, result);
 }
 
-// Placeholder for future macOS-specific initialization logic.
 void MacPlatform::setup()
 {
     NSView *view =
@@ -126,20 +117,30 @@ void MacPlatform::setup()
                            }];
 
     [[NSNotificationCenter defaultCenter]
+
         addObserverForName:NSWindowWillStartLiveResizeNotification
+
                     object:window
-                     queue:nil
+
+                     queue:[NSOperationQueue mainQueue]
+
                 usingBlock:^(NSNotification *note)
+
                            {
-                               this->macPlatform.setResizeModeActive(true);
+                                window.ignoresMouseEvents = YES;
                            }];
 
     [[NSNotificationCenter defaultCenter]
+
         addObserverForName:NSWindowDidEndLiveResizeNotification
+
                     object:window
-                     queue:nil
+
+                     queue:[NSOperationQueue mainQueue]
+
                 usingBlock:^(NSNotification *note)
+
                            {
-                               this->macPlatform.setResizeModeActive(false);
+                              window.ignoresMouseEvents = NO;
                            }];
 }

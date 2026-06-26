@@ -1,19 +1,17 @@
 #ifndef MACPLATFORM_H
 #define MACPLATFORM_H
 
-#include "platform/IPlatform.h"
-
 #include "../AppMainWindow.h"
 
 #include "utils/MacUtils.h"
 
-class MacPlatform : public IPlatform,
-                    public AppMainWindow
+class MacPlatform : public AppMainWindow
 {
+    Q_OBJECT
 public:
     explicit MacPlatform(QWindow *parent = nullptr);
 
-    void Q_INVOKABLE setup() override;
+    Q_INVOKABLE void setup() override;
 
 protected:
     bool nativeEvent(const QByteArray &eventType,

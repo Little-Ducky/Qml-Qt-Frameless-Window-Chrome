@@ -1,22 +1,15 @@
 #include "MacUtils.h"
+#include <qDebug>
+
+#include "AppMainWindow.h"
 
 MacUtils::MacUtils()
 {
 }
 
-void MacUtils::setResizeModeActive(bool active)
-{
-    m_resizeModeActive = active;
-}
-
-bool MacUtils::resizeModeActive()
-{
-    return m_resizeModeActive;
-}
-
 bool MacUtils::isInResizeArea(const QPointF& p, const QSizeF& size)
 {
-    constexpr qreal Border = 4.0;
+    constexpr qreal Border = AppMainWindow::RESIZE_BORDER;
     constexpr qreal Corner = Border * 4.0;
 
     const qreal x = p.x();

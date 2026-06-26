@@ -13,9 +13,9 @@ class AppMainWindow : public QQuickWindow
 {
     Q_OBJECT
 
-    Q_PROPERTY(int RESIZE_BORDER MEMBER RESIZE_BORDER CONSTANT)
-    Q_PROPERTY(AppCaption* caption MEMBER m_appCaption CONSTANT)
-    Q_PROPERTY(AppWindowController* controller MEMBER m_appWindowController CONSTANT)
+    Q_PROPERTY(int RESIZE_BORDER MEMBER RESIZE_BORDER CONSTANT FINAL)
+    Q_PROPERTY(AppCaption* caption MEMBER m_appCaption CONSTANT FINAL)
+    Q_PROPERTY(AppWindowController* controller MEMBER m_appWindowController CONSTANT FINAL)
 
 public:
     explicit AppMainWindow(QWindow *parent = nullptr) :

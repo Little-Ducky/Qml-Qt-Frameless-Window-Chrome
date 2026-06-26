@@ -44,6 +44,24 @@ elseif(UNIX)
     )
 endif()
 
+set(PLATFORM_QML_FILES)
+
+if(WIN32)
+    list(APPEND PLATFORM_QML_FILES
+        qml/appmainwindow/appcaption/windows/AppCaption.qml
+    )
+
+elseif(APPLE)
+    list(APPEND PLATFORM_QML_FILES
+        qml/appmainwindow/appcaption/mac/AppCaption.qml
+    )
+
+elseif(UNIX)
+    list(APPEND PLATFORM_QML_FILES
+        qml/appmainwindow/appcaption/linux/AppCaption.qml
+    )
+endif()
+
 target_compile_definitions(${QML_MODULE} PRIVATE
     QML_MODULE="${QML_MODULE}"
 )
@@ -55,11 +73,14 @@ qt_add_qml_module(${QML_MODULE}
 
         qml/views/AppChrome.qml
 
-        qml/appmainwindow/appcaption/windows/AppCaption.qml
+        ${PLATFORM_QML_FILES}
+
         qml/appmainwindow/controls/buttons/CaptionButton.qml
         qml/appmainwindow/controls/buttons/CaptionButton.qml
 
         qml/views/AppChrome.qml
+
+        qml/appmainwindow/appcaption/BaseCaption.qml
 
     SOURCES
         application/Application.h

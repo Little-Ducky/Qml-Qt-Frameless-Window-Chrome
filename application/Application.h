@@ -18,7 +18,7 @@ namespace Application {
 // where native window events are intercepted and replaced with custom logic
 // (frameless window, custom title bar, resize handling, system menu, etc.).
 // On other platforms, default behavior is used.
-inline void registerUiTypes()
+void registerUiTypes()
 {
 #if defined(_WIN32)
     qmlRegisterType<WindowsPlatform>(
@@ -28,7 +28,12 @@ inline void registerUiTypes()
         );
 }
 #elif defined(__APPLE__)
-#include "mac/MacPlatform"
+    qmlRegisterType<MacPlatform>(
+        QML_MODULE,
+        1, 0,
+        "AppMainWindow"
+        );
+}
 #elif defined(__linux__)
 // Linux
 #endif
