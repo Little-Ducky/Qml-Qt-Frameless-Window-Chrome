@@ -4,16 +4,16 @@ set(PROJECT_NAME AppChrome)
 project(${PROJECT_NAME} VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(QML_MODULE ${PROJECT_NAME})
+set(PLATFORM_SOURCES)
+set(PLATFORM_QML_FILES)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.10)
-
-set(QML_MODULE ${PROJECT_NAME})
-set(PLATFORM_SOURCES)
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 
 qt_add_executable(${PROJECT_NAME}
     main.cpp
@@ -43,8 +43,6 @@ elseif(UNIX)
         platform/ui/appmainwindow/linuxplatform/LinuxPlatform.cpp
     )
 endif()
-
-set(PLATFORM_QML_FILES)
 
 if(WIN32)
     list(APPEND PLATFORM_QML_FILES
