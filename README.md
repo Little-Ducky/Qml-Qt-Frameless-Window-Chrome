@@ -1,15 +1,13 @@
-# Qt-Frameless-Window-Chrome
+#Qml-Qt-Frameless-Window-Chrome
 
 Custom Frameless Window component for Qt Quick (QML).
 Provides full control over the title bar, window resizing, system menu, and native window behavior.
-
-Windows and Mac implementations are included, while Linux currently rely on native system window decorations.
 
 ---
 
 ## Overview
 
-This project provides a native-like window experience for Qt Quick applications with a fully custom window chrome implementation on Windows, MacOS.
+This project provides a native-like window experience for Qt Quick applications with a fully custom window chrome implementation on Windows, MacOS and Linux.
 
 It is designed as a modular and extensible solution for building custom title bars and frameless windows.
 
@@ -25,7 +23,7 @@ Example of how the custom window behaves on Windows 11, including native-like wi
 
 <img width="1480" height="1086" alt="obrazek" src="https://github.com/user-attachments/assets/2cc882f5-c06f-4384-8066-0d1c520d1400" />
 
-## Features windows
+## Features Windows
 
 - Frameless window support ✔️
 - Custom title bar implementation ✔️
@@ -35,7 +33,7 @@ Example of how the custom window behaves on Windows 11, including native-like wi
 - Windows Aero / DWM integration ✔️
 - Full control over non-client area on Windows ✔️
 
-## Features macOS
+## Features MacOS
 
 - Frameless window support ✔️
 - Custom title bar implementation ✔️
@@ -45,13 +43,23 @@ Example of how the custom window behaves on Windows 11, including native-like wi
 - Native double-click title bar action (Minimize / Zoom) ✔️
 - Full-size content view integration ✔️
 
+## Features Linux
+
+- Frameless window support ✔️
+- Custom title bar implementation ✔️
+- Native window resizing ✔️
+- Window moving via custom caption area ✔️
+- Native double-click title bar action ✔️
+- Window snapping / edge tiling handled by system compositor ✔️
+
+
 ## Platform Support
 
 | Platform | Support status | Notes |
 |----------|---------------|------|
-| Windows  | ✔ Fully supported | Custom window chrome implementation (WinAPI + Qt) |
-| macOS    | ✔ Fully supported | Custom window chrome implementation (Cocoa (AppKit) + Qt) |
-| Linux    | ✖ Not implemented | Uses native system window decorations |
+| Windows  | ✔ | Custom window chrome implementation (WinAPI + Qt) |
+| macOS    | ✔ | Custom window chrome implementation (Cocoa (AppKit) + Qt) |
+| Linux    | ✔ | Custom window chrome implementation (Qt) |
 
 ---
 
@@ -65,7 +73,6 @@ Due to full custom non-client area implementation (WM_NCCALCSIZE / WM_NCHITTEST)
 
 ## Architecture Notes
 
-- Linux currently rely on system window managers
 - Architecture is designed to be extensible for future platform-specific backends
 - Controller-based window management API exposed to QML
 
