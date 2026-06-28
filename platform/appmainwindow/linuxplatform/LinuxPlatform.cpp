@@ -21,7 +21,7 @@ bool LinuxPlatform::event(QEvent *e)
     {
         auto *me = static_cast<QMouseEvent *>(e);
 
-        const Qt::Edges edges = resizeEdges(me->position());
+        const Qt::Edges edges = LinuxUtils::resizeEdges(me->position(), size());
 
         if (edges == (Qt::LeftEdge | Qt::TopEdge) ||
             edges == (Qt::RightEdge | Qt::BottomEdge))
@@ -64,7 +64,7 @@ bool LinuxPlatform::event(QEvent *e)
         if (me->button() != Qt::LeftButton)
             break;
 
-        const Qt::Edges edges = resizeEdges(me->position());
+        const Qt::Edges edges = LinuxUtils::resizeEdges(me->position(), size());
 
         if (edges)
         {
@@ -75,8 +75,8 @@ bool LinuxPlatform::event(QEvent *e)
 
         const QPointF pt = me->position();
 
-        if (pt.y() < m_appCaption->height() &&
-            !m_appCaption->findInteractiveAt(
+        if (pt.y() < m_captionController->height() &&
+            !m_captionController->findInteractiveAt(
                 contentItem(),
                 pt.toPoint()))
         {
@@ -92,7 +92,7 @@ bool LinuxPlatform::event(QEvent *e)
     {
         auto *me = static_cast<QMouseEvent *>(e);
 
-        const Qt::Edges edges = resizeEdges(me->position());
+        const Qt::Edges edges = LinuxUtils::resizeEdges(me->position(), size());
 
         if (edges)
         {
@@ -103,12 +103,12 @@ bool LinuxPlatform::event(QEvent *e)
         const QPointF pt = me->position();
 
         if (me->button() == Qt::LeftButton &&
-            pt.y() < m_appCaption->height() &&
-            !m_appCaption->findInteractiveAt(
+            pt.y() < m_captionController->height() &&
+            !m_captionController->findInteractiveAt(
                 contentItem(),
                 pt.toPoint()))
         {
-            m_appWindowController->toggleMaximized();
+            m_windowController->toggleMaximized();
             me->accept();
             return true;
         }
@@ -122,26 +122,7 @@ bool LinuxPlatform::event(QEvent *e)
 
     return QQuickWindow::event(e);
 }
-Qt::Edges LinuxPlatform::resizeEdges(const QPointF &pos) const
-{
-    constexpr qreal border = 8.0;
 
-    Qt::Edges edges;
-
-    if (pos.x() <= border)
-        edges |= Qt::LeftEdge;
-
-    if (pos.x() >= width() - border)
-        edges |= Qt::RightEdge;
-
-    if (pos.y() <= border)
-        edges |= Qt::TopEdge;
-
-    if (pos.y() >= height() - border)
-        edges |= Qt::BottomEdge;
-
-    return edges;
-}
 void LinuxPlatform::setup()
 {
     setFlags(Qt::Window | Qt::FramelessWindowHint);

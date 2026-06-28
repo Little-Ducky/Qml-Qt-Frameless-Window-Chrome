@@ -3,15 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 BaseCaption {
-    implicitHeight: window.caption.height()
-    width: window.width
-
     RowLayout {
         anchors.fill: parent
         spacing: 8
 
         Label {
-            text: window.title
+            text: root.title
 
             font.pixelSize: 18
             font.bold: true
@@ -31,27 +28,27 @@ BaseCaption {
             Layout.fillHeight: true
         }
 
-        CaptionButton {
-            text: window.visibility === Window.Maximized ? "⧉" : "⛶"
+        DefaultCaptionButton {
+            text: root.visibility === Window.Maximized ? "⧉" : "⛶"
 
             Layout.alignment: Qt.AlignVCenter
             Layout.fillHeight: true
 
-            onClicked: window.controller.toggleMaximized()
+            onClicked: root.windowController.toggleMaximized()
         }
 
-        CaptionButton {
+        DefaultCaptionButton {
             text: "—"
             Layout.alignment: Qt.AlignVCenter
             Layout.fillHeight: true
-            onClicked: window.controller.showMinimized()
+            onClicked: root.windowController.showMinimized()
         }
 
-        CaptionButton {
+        DefaultCaptionButton {
             text: "✕"
             Layout.alignment: Qt.AlignVCenter
             Layout.fillHeight: true
-            onClicked: window.controller.close()
+            onClicked: root.windowController.close()
         }
     }
 }

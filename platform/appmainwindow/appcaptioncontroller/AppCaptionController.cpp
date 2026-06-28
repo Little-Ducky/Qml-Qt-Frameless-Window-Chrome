@@ -1,6 +1,6 @@
-#include "AppCaption.h"
+#include "AppCaptionController.h"
 
-AppCaption::AppCaption(QObject *parent)
+AppCaptionController::AppCaptionController(QObject *parent)
     : QObject{parent}
 {
 }
@@ -8,14 +8,14 @@ AppCaption::AppCaption(QObject *parent)
 // Returns the effective caption height in device pixels.
 // The value is scaled according to the screen's devicePixelRatio
 // to ensure correct sizing on high-DPI displays.
-int AppCaption::height() const
+int AppCaptionController::height() const
 {
     return qRound(HEIGHT_CAPTION_BASE * qobject_cast<QWindow*>(parent())->screen()->devicePixelRatio());
 }
 
 // Determines whether a QML item should be ignored during hit-testing.
 // Typically ignores static text elements that should not block window dragging.
-bool AppCaption::isIgnorable(QQuickItem *i)
+bool AppCaptionController::isIgnorable(QQuickItem *i)
 {
     if (!i)
         return true;
@@ -29,7 +29,7 @@ bool AppCaption::isIgnorable(QQuickItem *i)
 
 // Checks whether a QML item is interactive (can receive mouse input).
 // Used to prevent treating clickable UI elements as draggable caption area.
-bool AppCaption::isInteractive(QQuickItem *i)
+bool AppCaptionController::isInteractive(QQuickItem *i)
 {
     if (!i)
         return false;
@@ -40,7 +40,7 @@ bool AppCaption::isInteractive(QQuickItem *i)
 // Recursively searches for an interactive QML item under the given scene position.
 // Used to determine whether the mouse is over a clickable element inside the caption area,
 // so that dragging the window is disabled in that case.
-QQuickItem* AppCaption::findInteractiveAt(QQuickItem *parent,
+QQuickItem* AppCaptionController::findInteractiveAt(QQuickItem *parent,
                                              const QPointF &scenePos)
 {
     if (!parent || !parent->isVisible())

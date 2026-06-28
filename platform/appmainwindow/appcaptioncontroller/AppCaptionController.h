@@ -6,12 +6,12 @@
 #include <QQuickWindow>
 #include <QQuickItem>
 
-class AppCaption : public QObject
+class AppCaptionController : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit AppCaption(QObject *parent = nullptr);
+    explicit AppCaptionController(QObject *parent = nullptr);
 
     inline static constexpr int HEIGHT_CAPTION_BASE = 40;
 

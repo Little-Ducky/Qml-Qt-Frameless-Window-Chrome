@@ -1,34 +1,44 @@
 import QtQuick 2.15
 
 AppMainWindow {
-    id: window
+    id: root
 
-    property color backgroundColorCaption: Gradient {
-                                                   GradientStop {
-                                                       position: 0.0
-                                                       color: "#26133D"
-                                                   }
+    property Component caption: defaultCaption
 
-                                                   GradientStop {
-                                                       position: 0.5
-                                                       color: "#1D102F"
-                                                   }
-
-                                                   GradientStop {
-                                                       position: 1.0
-                                                       color: "#130A22"
-                                                   }
-                                               }
     visible: false
 
-    AppCaption {
-        color: backgroundColorCaption
+    Component {
+        id: defaultCaption
+
+        DefaultAppCaption {
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: "#26133D"
+                }
+
+                GradientStop {
+                    position: 0.5
+                    color: "#1D102F"
+                }
+
+                GradientStop {
+                    position: 1.0
+                    color: "#130A22"
+                }
+            }
+        }
+    }
+
+    Loader {
+        id: captionLoader
+        sourceComponent: root.caption
     }
 
     Component.onCompleted: {
         // Performs platform-specific window initialization.
-        window.setup()
+        root.setup()
 
-        window.visible = true
+        root.visible = true
     }
 }

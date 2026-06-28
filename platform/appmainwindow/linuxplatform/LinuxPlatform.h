@@ -3,6 +3,8 @@
 
 #include "../AppMainWindow.h"
 
+#include "utils/LinuxUtils.h"
+
 class LinuxPlatform : public AppMainWindow
 {
     Q_OBJECT
@@ -17,10 +19,7 @@ protected:
                      void *message,
                      qintptr *result) override;
 
-    bool event(QEvent *e);
-
-private:
-    Qt::Edges resizeEdges(const QPointF &pos) const;
+    bool event(QEvent *e) override;
 };
 
 

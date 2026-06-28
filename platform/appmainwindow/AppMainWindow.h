@@ -6,7 +6,7 @@
 #include <QQuickItem>
 #include <QCursor>
 
-#include "appcaption/AppCaption.h"
+#include "appcaptioncontroller/AppCaptionController.h"
 #include "appwindowcontroller/AppWindowController.h"
 
 class AppMainWindow : public QQuickWindow
@@ -14,14 +14,14 @@ class AppMainWindow : public QQuickWindow
     Q_OBJECT
 
     Q_PROPERTY(int RESIZE_BORDER MEMBER RESIZE_BORDER CONSTANT FINAL)
-    Q_PROPERTY(AppCaption* caption MEMBER m_appCaption CONSTANT FINAL)
-    Q_PROPERTY(AppWindowController* controller MEMBER m_appWindowController CONSTANT FINAL)
+    Q_PROPERTY(AppCaptionController* captionController MEMBER m_captionController CONSTANT FINAL)
+    Q_PROPERTY(AppWindowController* windowController MEMBER m_windowController CONSTANT FINAL)
 
 public:
     explicit AppMainWindow(QWindow *parent = nullptr) :
         QQuickWindow(parent),
-        m_appCaption(new AppCaption(this)),
-        m_appWindowController(new AppWindowController(this))
+        m_captionController(new AppCaptionController(this)),
+        m_windowController(new AppWindowController(this))
     {
     }
 
@@ -35,8 +35,8 @@ protected:
                      void *message,
                      qintptr *result) override = 0;
 protected:
-    AppCaption* m_appCaption = nullptr;
-    AppWindowController* m_appWindowController = nullptr;
+    AppCaptionController* m_captionController = nullptr;
+    AppWindowController* m_windowController = nullptr;
 };
 
 #endif // APPMAINWINDOW_H

@@ -8,7 +8,7 @@
 
 #include <QtCore>
 
-#include "platform/ui/appmainwindow/AppMainWindow.h"
+#include "appmainwindow/AppMainWindow.h"
 
 class WindowsUtils
 {

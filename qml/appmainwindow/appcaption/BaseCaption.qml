@@ -1,10 +1,6 @@
 import QtQuick 2.15
-import QtQuick.Controls
-import QtQuick.Layouts
 
 Rectangle {
-    implicitHeight: window.caption.height()
+    implicitHeight: window.captionController.height()
     width: window.width
-
-
 }

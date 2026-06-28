@@ -67,8 +67,8 @@ bool MacPlatform::nativeEvent(const QByteArray &type,
         }
 
         if (!overTrafficLights &&
-            mapFromGlobal(QCursor::pos()).y() < m_appCaption->height() &&
-            !m_appCaption->findInteractiveAt(contentItem(),
+            mapFromGlobal(QCursor::pos()).y() < m_captionController->height() &&
+            !m_captionController->findInteractiveAt(contentItem(),
                                              mapFromGlobal(QCursor::pos())))
         {
             [window performWindowDragWithEvent:event];

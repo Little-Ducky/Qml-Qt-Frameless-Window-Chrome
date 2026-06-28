@@ -1,8 +1,15 @@
 import QtQuick
 
 AppChrome {
+    id: window
+
     width: 640
     height: 480
 
-    title: qsTr("AppChrome demo")
+    title: qsTr("My custom caption example")
+
+    caption: Component {
+        CustomCaption {}
+    }
 }
+

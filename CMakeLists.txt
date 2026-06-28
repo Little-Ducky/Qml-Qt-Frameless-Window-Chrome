@@ -28,36 +28,38 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 if(WIN32)
     list(APPEND PLATFORM_SOURCES
-        platform/ui/appmainwindow/windowsplatform/WindowsPlatform.h
-        platform/ui/appmainwindow/windowsplatform/WindowsPlatform.cpp
-        platform/ui/appmainwindow/windowsplatform/utils/WindowsUtils.h
-        platform/ui/appmainwindow/windowsplatform/utils/WindowsUtils.cpp
+        platform/appmainwindow/windowsplatform/WindowsPlatform.h
+        platform/appmainwindow/windowsplatform/WindowsPlatform.cpp
+        platform/appmainwindow/windowsplatform/utils/WindowsUtils.h
+        platform/appmainwindow/windowsplatform/utils/WindowsUtils.cpp
     )
 
     list(APPEND PLATFORM_QML_FILES
-        qml/appmainwindow/appcaption/windows/AppCaption.qml
+        qml/appmainwindow/appcaption/windows/DefaultAppCaption.qml
     )
 
 elseif(APPLE)
     list(APPEND PLATFORM_SOURCES
-        platform/ui/appmainwindow/macplatform/MacPlatform.h
-        platform/ui/appmainwindow/macplatform/MacPlatform.mm
-        platform/ui/appmainwindow/macplatform/utils/MacUtils.h
-        platform/ui/appmainwindow/macplatform/utils/MacUtils.cpp
+        platform/appmainwindow/macplatform/MacPlatform.h
+        platform/appmainwindow/macplatform/MacPlatform.mm
+        platform/appmainwindow/macplatform/utils/MacUtils.h
+        platform/appmainwindow/macplatform/utils/MacUtils.cpp
     )
 
     list(APPEND PLATFORM_QML_FILES
-        qml/appmainwindow/appcaption/mac/AppCaption.qml
+        qml/appmainwindow/appcaption/mac/DefaultAppCaption.qml
     )
 
 elseif(UNIX)
     list(APPEND PLATFORM_SOURCES
-        platform/ui/appmainwindow/linuxplatform/LinuxPlatform.h
-        platform/ui/appmainwindow/linuxplatform/LinuxPlatform.cpp
+        platform/appmainwindow/linuxplatform/LinuxPlatform.h
+        platform/appmainwindow/linuxplatform/LinuxPlatform.cpp
+        platform/appmainwindow/linuxplatform/utils/LinuxUtils.h
+        platform/appmainwindow/linuxplatform/utils/LinuxUtils.cpp
     )
 
     list(APPEND PLATFORM_QML_FILES
-        qml/appmainwindow/appcaption/linux/AppCaption.qml
+        qml/appmainwindow/appcaption/linux/DefaultAppCaption.qml
     )
 endif()
 
@@ -67,31 +69,36 @@ qt_add_qml_module(${PROJECT_NAME}
     QML_FILES
         Main.qml
 
-        qml/views/AppChrome.qml
-
-        qml/appmainwindow/controls/buttons/CaptionButton.qml
         qml/appmainwindow/appcaption/BaseCaption.qml
 
+        qml/views/AppChrome.qml
+
+        qml/appmainwindow/controls/buttons/DefaultCaptionButton.qml
+
         ${PLATFORM_QML_FILES}
+
+        qml/tests/CustomCaption.qml
+
+        qml/tests/controls/CustomCaptionButton.qml
 
     SOURCES
         application/Application.h
 
-        platform/ui/appmainwindow/AppMainWindow.h
+        platform/appmainwindow/AppMainWindow.h
 
-        platform/ui/appmainwindow/appcaption/AppCaption.h
-        platform/ui/appmainwindow/appcaption/AppCaption.cpp
+        platform/appmainwindow/appcaptioncontroller/AppCaptionController.h
+        platform/appmainwindow/appcaptioncontroller/AppCaptionController.cpp
 
-        platform/ui/appmainwindow/appwindowcontroller/AppWindowController.h
-        platform/ui/appmainwindow/appwindowcontroller/AppWindowController.cpp
+        platform/appmainwindow/appwindowcontroller/AppWindowController.h
+        platform/appmainwindow/appwindowcontroller/AppWindowController.cpp
 
         ${PLATFORM_SOURCES}
+        platform/appmainwindow/appcaptioncontroller/AppCaptionController.h
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/platform
-    ${CMAKE_CURRENT_SOURCE_DIR}/platform/ui
-    ${CMAKE_CURRENT_SOURCE_DIR}/platform/ui/appmainwindow
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/appmainwindow
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

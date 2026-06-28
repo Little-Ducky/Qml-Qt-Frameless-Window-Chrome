@@ -57,12 +57,12 @@ bool WindowsPlatform::nativeEvent(const QByteArray& eventType,
         {
         case SC_MINIMIZE:
             // Window is being minimized via system command (title bar, taskbar, Win key, etc.)
-            m_appWindowController->showMinimized();
+            m_windowController->showMinimized();
             return true;
 
         case SC_RESTORE:
             // Window is being restored from minimized/maximized state
-            m_appWindowController->showNormal();
+            m_windowController->showNormal();
             return true;
 
         default:
@@ -167,8 +167,8 @@ bool WindowsPlatform::nativeEvent(const QByteArray& eventType,
 
         // Checks if the cursor is inside the custom caption (title bar area)
         // and ensures it's not over an interactive UI element (buttons, inputs, etc.)
-        if (pt.y < m_appCaption->height() &&
-            !m_appCaption->findInteractiveAt(contentItem(), mapFromGlobal(QCursor::pos())))
+        if (pt.y < m_captionController->height() &&
+            !m_captionController->findInteractiveAt(contentItem(), mapFromGlobal(QCursor::pos())))
         {
             *result = HTCAPTION;
             return true;

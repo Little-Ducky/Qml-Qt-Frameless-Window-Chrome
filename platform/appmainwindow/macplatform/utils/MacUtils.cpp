@@ -9,8 +9,8 @@ MacUtils::MacUtils()
 
 bool MacUtils::isInResizeArea(const QPointF& p, const QSizeF& size)
 {
-    constexpr qreal Border = AppMainWindow::RESIZE_BORDER;
-    constexpr qreal Corner = Border * 4.0;
+    constexpr qreal border = AppMainWindow::RESIZE_BORDER;
+    constexpr qreal corner = border * 4.0;
 
     const qreal x = p.x();
     const qreal y = p.y();
@@ -18,40 +18,40 @@ bool MacUtils::isInResizeArea(const QPointF& p, const QSizeF& size)
     const qreal w = size.width();
     const qreal h = size.height();
 
-    if (x <= Corner && y <= Corner &&
-        (x > Border || y > Border))
+    if (x <= corner && y <= corner &&
+        (x > border || y > border))
     {
         return true;
     }
 
-    if (x >= w - Corner && y <= Corner &&
-        (x < w - Border || y > Border))
+    if (x >= w - corner && y <= corner &&
+        (x < w - border || y > border))
     {
         return true;
     }
 
-    if (x <= Corner && y >= h - Corner &&
-        (x > Border || y < h - Border))
+    if (x <= corner && y >= h - corner &&
+        (x > border || y < h - border))
     {
         return true;
     }
 
-    if (x >= w - Corner && y >= h - Corner &&
-        (x < w - Border || y < h - Border))
+    if (x >= w - corner && y >= h - corner &&
+        (x < w - border || y < h - border))
     {
         return true;
     }
 
-    if (x <= Border)
+    if (x <= border)
         return true;
 
-    if (x >= w - Border)
+    if (x >= w - border)
         return true;
 
-    if (y <= Border)
+    if (y <= border)
         return true;
 
-    if (y >= h - Border)
+    if (y >= h - border)
         return true;
 
     return false;
