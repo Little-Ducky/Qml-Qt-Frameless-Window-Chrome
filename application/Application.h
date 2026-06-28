@@ -39,4 +39,3 @@ void registerUiTypes()
 }
 }
 #endif // APPLICATION_H
-

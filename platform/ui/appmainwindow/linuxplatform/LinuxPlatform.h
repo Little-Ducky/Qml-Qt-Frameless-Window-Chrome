@@ -16,6 +16,11 @@ protected:
     bool nativeEvent(const QByteArray &eventType,
                      void *message,
                      qintptr *result) override;
+
+    bool event(QEvent *e);
+
+private:
+    Qt::Edges resizeEdges(const QPointF &pos) const;
 };
 
 
